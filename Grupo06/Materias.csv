@@ -1,0 +1,131 @@
+Nro de carrera;Cod.Materia;mat precedente;Carrera;Materia
+1;31006;;Analista de Sistemas;Algebra y Geometria Analitica
+1;34068;;Analista de Sistemas;Procesos y Sistemas Administrativos
+1;34069;;Analista de Sistemas;Fundamentos de Informatica
+1;21002;;Analista de Sistemas;Pensamiento Critico y Comunicacion
+1;34043;;Analista de Sistemas;Teoria de Sistemas
+1;31024;;Analista de Sistemas;Matematica Discreta
+1;34070;34068;Analista de Sistemas;Metodologias de Desarrollo
+1;34071;34069;Analista de Sistemas;Programacion I
+1;34072;;Analista de Sistemas;Arquitectura de Computadores
+1;31007;;Analista de Sistemas;Analisis Matematico I
+1;31018;31007;Analista de Sistemas;Estadistica General
+1;31018;31006;Analista de Sistemas;Estadistica General
+1;34073;34070;Analista de Sistemas;Ingenieria de Requerimientos
+1;34074;34071;Analista de Sistemas;Programacion II
+1;34075;34072;Analista de Sistemas;Sistemas Operativos
+1;31008;31007;Analista de Sistemas;Analisis Matematico II
+1;24121;;Analista de Sistemas;Ingles I
+1;34076;34071;Analista de Sistemas;Introduccion a la Orientacion a Objetos
+1;34076;34070;Analista de Sistemas;Introduccion a la Orientacion a Objetos
+1;34077;34074;Analista de Sistemas;Programacion III
+1;34078;;Analista de Sistemas;Fundamentos de Telecomunicaciones
+1;24122;24121;Analista de Sistemas;Ingles II
+1;34079;34076;Analista de Sistemas;Analisis y Diseño Orientado a Objetos
+1;34080;34070;Analista de Sistemas;Base de Datos I
+1;34081;34078;Analista de Sistemas;Teleinformatica y Redes I
+1;2;;Analista de Sistemas;Optativa (2 Materias)
+1111;34068;;Tec. Univ. En Desarrollo de Sist.;Procesos y Sistemas Administrativos
+1111;34069;;Tec. Univ. En Desarrollo de Sist.;Fundamentos de Informatica
+1111;34072;;Tec. Univ. En Desarrollo de Sist.;Arquitectura de Computadores
+1111;34070;34068;Tec. Univ. En Desarrollo de Sist.;Metodologias de Desarrollo
+1111;34071;34069;Tec. Univ. En Desarrollo de Sist.;Programacion I
+1111;34075;34072;Tec. Univ. En Desarrollo de Sist.;Sistemas Operativos
+1111;34073;34070;Tec. Univ. En Desarrollo de Sist.;Ingenieria de Requerimientos
+1111;34074;34071;Tec. Univ. En Desarrollo de Sist.;Programacion II
+1111;34079;34076;Tec. Univ. En Desarrollo de Sist.;Analisis y Diseño Orientado a Objetos
+1111;34077;34074;Tec. Univ. En Desarrollo de Sist.;Programacion III
+1111;34078;;Tec. Univ. En Desarrollo de Sist.;Fundamentos de Telecomunicaciones
+1111;34089;34073;Tec. Univ. En Desarrollo de Sist.;Direccion de Proyectos Informaticos
+1111;34080;34070;Tec. Univ. En Desarrollo de Sist.;Base de Datos I
+1111;34081;34078;Tec. Univ. En Desarrollo de Sist.;Teleinformatica y Redes I
+1111;34084;34080;Tec. Univ. En Desarrollo de Sist.;Base de Datos II
+1111;34085;34081;Tec. Univ. En Desarrollo de Sist.;Teleinformatica y Redes II
+1111;34105;;Tec. Univ. En Desarrollo de Sist.;Trabajo Final
+1111;34082;34076;Tec. Univ. En Desarrollo de Sist.;Aplicaciones Interactivas
+1111;3;;Tec. Univ. En Desarrollo de Sist.;Optativa (3 Materia)
+13116;34068;;Lic. En Gestión de Tecnología de la Información;Procesos y Sistemas Administrativos
+13116;34069;;Lic. En Gestión de Tecnología de la Información;Fundamentos de Informatica
+13116;21002;;Lic. En Gestión de Tecnología de la Información;Pensamiento Critico y Comunicacion
+13116;34130;;Lic. En Gestión de Tecnología de la Información;Tecnologia y Medioambiente
+13116;12001;;Lic. En Gestión de Tecnología de la Información;Marketing
+13116;31040;;Lic. En Gestión de Tecnología de la Información;Elementos de Matematica
+13116;34070;34068;Lic. En Gestión de Tecnología de la Información;Metodologias de Desarrollo
+13116;34071;34069;Lic. En Gestión de Tecnología de la Información;Programacion I
+13116;34072;;Lic. En Gestión de Tecnología de la Información;Arquitectura de Computadores
+13116;11093;;Lic. En Gestión de Tecnología de la Información;Liderazgo y Negociacion
+13116;34131;;Lic. En Gestión de Tecnología de la Información;Gestion de Personas en Organizaciones de Tecnologia
+13116;34132;;Lic. En Gestión de Tecnología de la Información;Requerimientos y Negocios
+13116;34074;34071;Lic. En Gestión de Tecnología de la Información;Programacion II
+13116;34075;34072;Lic. En Gestión de Tecnología de la Información;Sistemas Operativos
+13116;34133;;Lic. En Gestión de Tecnología de la Información;Fundamentos de Telecomunicaciones
+13116;24227;;Lic. En Gestión de Tecnología de la Información;Ingles
+13116;34077;34074;Lic. En Gestión de Tecnología de la Información;Programacion III
+13116;14076;31040;Lic. En Gestión de Tecnología de la Información;Fundamentos de Economia
+13116;34134;34133;Lic. En Gestión de Tecnología de la Información;Teleinformatica y Redes de Datos
+13116;31018;31040;Lic. En Gestión de Tecnología de la Información;Estadistica General
+13116;34079;34076;Lic. En Gestión de Tecnología de la Información;Analisis y Diseño Orientado a Objetos
+13116;34135;;Lic. En Gestión de Tecnología de la Información;Tecnologia e Innovacion
+13116;34136;;Lic. En Gestión de Tecnología de la Información;Nuevas Tecnologias de la Informacion
+13116;34080;34070;Lic. En Gestión de Tecnología de la Información;Base de Datos I
+13116;34084;34080;Lic. En Gestión de Tecnología de la Información;Base de Datos II
+13116;31019;31018;Lic. En Gestión de Tecnología de la Información;Estadistica Aplicada
+13116;34082;34076;Lic. En Gestión de Tecnología de la Información;Aplicaciones Interactivas
+13116;34092;34134;Lic. En Gestión de Tecnología de la Información;Seguridad e Integridad de la Informacion
+13116;34139;31040;Lic. En Gestión de Tecnología de la Información;Evaluacion de Proyectos de Tecnologia
+13116;31021;31018;Lic. En Gestión de Tecnología de la Información;Investigacion Operativa
+13116;34087;34082;Lic. En Gestión de Tecnología de la Información;Aplicaciones Distribuidas
+13116;34141;34079;Lic. En Gestión de Tecnología de la Información;Seguridad de Procesos y Aplicaciones
+13116;23056;;Lic. En Gestión de Tecnología de la Información;Derecho Informatico
+13116;34142;34132;Lic. En Gestión de Tecnología de la Información;Direccion de Proyectos de Tecnologia
+13116;34090;34087;Lic. En Gestión de Tecnología de la Información;Integracion de Aplicaciones
+13116;34143;34138;Lic. En Gestión de Tecnología de la Información;Seminario de Gestion de Tecnologia II
+13116;34097;34139;Lic. En Gestión de Tecnología de la Información;Tecnologia y Negocios
+1608;31006;;Ing. En Informática;Algebra y Geometria Analitica
+1608;34068;;Ing. En Informática;Procesos y Sistemas Administrativos
+1608;34069;;Ing. En Informática;Fundamentos de Informatica
+1608;21002;;Ing. En Informática;Pensamiento Critico y Comunicacion
+1608;34043;;Ing. En Informática;Teoria de Sistemas
+1608;31024;;Ing. En Informática;Matematica Discreta
+1608;34070;34068;Ing. En Informática;Metodologias de Desarrollo
+1608;34071;34069;Ing. En Informática;Programacion I
+1608;34072;;Ing. En Informática;Arquitectura de Computadores
+1608;31007;;Ing. En Informática;Analisis Matematico I
+1608;34073;34070;Ing. En Informática;Ingenieria de Requerimientos
+1608;34074;34071;Ing. En Informática;Programacion II
+1608;34075;34072;Ing. En Informática;Sistemas Operativos
+1608;31008;31007;Ing. En Informática;Analisis Matematico II
+1608;24121;;Ing. En Informática;Ingles I
+1608;34077;34074;Ing. En Informática;Programacion III
+1608;34078;;Ing. En Informática;Fundamentos de Telecomunicaciones
+1608;31009;31008;Ing. En Informática;Analisis Matematico III
+1608;24122;24121;Ing. En Informática;Ingles II
+1608;34079;34076;Ing. En Informática;Analisis y Diseño Orientado a Objetos
+1608;34080;34070;Ing. En Informática;Base de Datos I
+1608;34081;34078;Ing. En Informática;Teleinformatica y Redes I
+1608;33002;31007;Ing. En Informática;Fisica General
+1608;31019;31018;Ing. En Informática;Estadistica Aplicada
+1608;34082;34076;Ing. En Informática;Aplicaciones Interactivas
+1608;34084;34080;Ing. En Informática;Base de Datos II
+1608;34085;34081;Ing. En Informática;Teleinformatica y Redes II
+1608;31021;31018;Ing. En Informática;Investigacion Operativa
+1608;34086;31006;Ing. En Informática;Evaluacion de Proyectos Informaticos
+1608;34087;34082;Ing. En Informática;Aplicaciones Distribuidas
+1608;23056;;Ing. En Informática;Derecho Informatico
+1608;34089;34073;Ing. En Informática;Direccion de Proyectos Informaticos
+1608;34090;34087;Ing. En Informática;Integracion de Aplicaciones
+1608;34091;34083;Ing. En Informática;Seminario de Integracion Profesional II
+1608;34092;34081;Ing. En Informática;Seguridad e Integridad de la Informacion
+1608;33120;;Ing. En Informática;Gestion Ambiental
+1608;21006;;Ing. En Informática;Etica
+1608;34094;34087;Ing. En Informática;Arquitectura de Aplicaciones
+1608;31025;31009;Ing. En Informática;Modelado y Simulacion
+1608;33007;33002;Ing. En Informática;Optica y Calor
+1608;34096;34077;Ing. En Informática;Inteligencia Artificial
+1608;34097;34091;Ing. En Informática;Tecnologia y Negocios
+1608;34098;34093;Ing. En Informática;Calidad de Software
+1608;33121;;Ing. En Informática;Sistemas de Representacion
+1608;32081;;Ing. En Informática;Fundamentos de Quimica
+1608;34100;;Ing. En Informática;Proyecto Final de Ingenieria en Informatica
+1608;34095;34077;Ing. En Informática;Teoría de la computación
+1608;34095;31024;Ing. En Informática;Teoría de la computación
