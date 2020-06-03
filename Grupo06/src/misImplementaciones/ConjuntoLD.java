@@ -2,6 +2,11 @@ package misImplementaciones;
 
 import miApi.ConjuntoTDA;
 
+/**
+@autores: Fabre, Juan; Rozenblum, Lautaro;Sapoznik, Lucas; Di Paolo, Ivan; Gaston Gomez; 
+@grupo: 06
+ **/
+
 public class ConjuntoLD implements ConjuntoTDA {
 	
 	public class Nodo {

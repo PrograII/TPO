@@ -4,6 +4,11 @@ import misImplementaciones.ConjuntoLD;
 import miApi.ConjuntoTDA;
 import miApi.DiccionarioSimpleTDA;
 
+/**
+@autores: Fabre, Juan; Rozenblum, Lautaro;Sapoznik, Lucas; Di Paolo, Ivan; Gaston Gomez; 
+@grupo: 06
+ **/
+
 public class DicSimpleL implements DiccionarioSimpleTDA {
 	
 	class NodoClave {

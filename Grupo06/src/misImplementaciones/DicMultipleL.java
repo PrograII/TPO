@@ -4,6 +4,12 @@ import misImplementaciones.ConjuntoLD;
 import miApi.ConjuntoTDA;
 import miApi.DiccionarioMultipleTDA;
 
+/**
+@autores: Fabre, Juan; Rozenblum, Lautaro;Sapoznik, Lucas; Di Paolo, Ivan; Gaston Gomez; 
+@grupo: 06
+ **/
+
+
 public class DicMultipleL implements DiccionarioMultipleTDA{
 	
 	class NodoClave{

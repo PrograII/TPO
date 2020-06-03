@@ -20,11 +20,7 @@ import misImplementaciones.DicSimpleL;
 @grupo: 06
  **/
 
-
-
 public class AppTPO {
-
-
 
 	public static void main(String[] args) {		
 
@@ -625,13 +621,9 @@ public class AppTPO {
 	@Postcondición
 	@Costo
 	 **/
-	
 	public static void matrelacionadas20(DiccionarioMultipleTDA var){
-		
-	
 		int matcoinc = 0;
 		int mattotal = 0;
-		int contador = 0;
 		int c = 0;
 		ConjuntoTDA claves1 = var.Claves();
 		ConjuntoTDA claves2 = var.Claves();		
@@ -651,7 +643,6 @@ public class AppTPO {
 									matcoinc ++;
 								valores2.Sacar(valores2.Elegir());
 							}
-							contador ++;
 							c = porcentaje(mattotal, matcoinc, claves1.Elegir(), claves2.Elegir(), c);
 							mattotal = 0;
 							matcoinc = 0;
@@ -667,8 +658,8 @@ public class AppTPO {
 			claves1.Sacar(claves1.Elegir());
 			claves2 = var.Claves();
 		}
-		if (contador == c)
-			System.out.println("No se encontraron carreras con el 20% de sus materias en común.");
+		if (c == 0)
+			System.out.println(" No se encontraron carreras con el 20% de sus materias en común.");
 	}
 	
 	
@@ -676,14 +667,12 @@ public class AppTPO {
 	private static int porcentaje(int total, int tengo, int clave1, int clave2, int contador) {
 		int a = 0;
 		a = tengo * 100 / total;
-		if (a == 20)
-			System.out.println("La Carrera con código " + clave1 + " tiene en común con la carrera "+ clave2 + " el " + a + "% de sus materias.");
-		else {
+		System.out.println("La Carrera con código " + clave1 + " tiene en común con la carrera "+ clave2 + " el " + a + "% de sus materias.");
+		if (a <= 20) {
 			contador ++;
 		}
 		return contador;
 	}
-	
 	
 	/**
 	@Tarea 2 j
@@ -693,14 +682,12 @@ public class AppTPO {
 	@Postcondición
 	@Costo
 	 **/
-	
 	public static void matnocomunes(DiccionarioMultipleTDA var) {
 		ConjuntoTDA carreras1 = var.Claves();
 		ConjuntoTDA carreras2 = var.Claves();
 		ConjuntoTDA repasadas = new ConjuntoLD();
 		System.out.println("2-J Para cada combinación de dos carreras, indicar materias no comunes. ");
 		while (!carreras2.ConjuntoVacio()) {
-			System.out.println(carreras2.Elegir());
 			while (!carreras1.ConjuntoVacio()) {
 				if (carreras1.Elegir() == carreras2.Elegir() || repasadas.Pertenece(carreras1.Elegir())) {
 					carreras1.Sacar(carreras1.Elegir());
@@ -722,33 +709,23 @@ public class AppTPO {
 	}	
 	
 	public static ConjuntoTDA check(ConjuntoTDA a, ConjuntoTDA b) {
-		ConjuntoTDA mnc = new ConjuntoLD();
-		mnc.InicializarConjunto();
-		while (!a.ConjuntoVacio()) {
-			if (!b.Pertenece(a.Elegir())) {
-				mnc.Agregar(a.Elegir());
+		ConjuntoTDA mnc = b;
+		while(!a.ConjuntoVacio()) {
+			if(mnc.Pertenece(a.Elegir())) {
+				mnc.Sacar(a.Elegir());
 				a.Sacar(a.Elegir());
 			}
 			else
 				a.Sacar(a.Elegir());
 		}
-		if (b.ConjuntoVacio()) {
-			while(!a.ConjuntoVacio()) {
-				mnc.Agregar(a.Elegir());
-				a.Sacar(a.Elegir());
-			}
-		}
-		else
-			while(!b.ConjuntoVacio()) {
-				mnc.Agregar(b.Elegir());
-				b.Sacar(b.Elegir());
-			}
 		return mnc;
 	}
 	
 	public static void mostrarmaterias(ConjuntoTDA car1, ConjuntoTDA car2, ConjuntoTDA mnc) {
-		System.out.println("Materias de la carrera " + car1.Elegir() + " que no están en la materia " + car2.Elegir() + " son:");
-		while(!mnc.ConjuntoVacio()) {System.out.println(mnc.Elegir());mnc.Sacar(mnc.Elegir());
+		System.out.println("Materias que la carrera " + car2.Elegir() + " y la " + car1.Elegir() + " no tienen en común:");
+		while(!mnc.ConjuntoVacio()) {
+			System.out.println(mnc.Elegir());
+			mnc.Sacar(mnc.Elegir());
 		}
 	}
 	
