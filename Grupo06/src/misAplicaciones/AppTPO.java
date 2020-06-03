@@ -16,7 +16,7 @@ import misImplementaciones.DicMultipleL;
 import misImplementaciones.DicSimpleL;
 
 /**
-@autores: Gaston Gomez; .......;.......;......;
+@autores: Fabre, Juan; Rozenblum, Lautaro;Sapoznik, Lucas; Di Paolo, Ivan; Gaston Gomez; 
 @grupo: 06
  **/
 
@@ -46,9 +46,8 @@ public class AppTPO {
 		materiasComunesConDiccionario(meteriaList);
 		
 		compararCarreras(diccM);
-		
-		
 		materiasUnicaCarrera(diccM);
+		
 		matrelacionadas20(diccM);
 		matnocomunes(diccM);
 		
