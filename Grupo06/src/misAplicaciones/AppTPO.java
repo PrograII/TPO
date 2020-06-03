@@ -39,7 +39,7 @@ public class AppTPO {
 		porcentajeMateriasCienciasSPorCarrera(diccM);
 
 		contidadMateriasOptativas(meteriaList);		
-		materiasComunesConDiccionario(meteriaList);
+		materiasComunes(meteriaList);
 		
 		compararCarreras(diccM);
 		materiasUnicaCarrera(diccM);
@@ -396,51 +396,7 @@ public class AppTPO {
 	@Postcondición
 	@Costo
 	 **/
-
 	public static void materiasComunes( ArrayList<Materias>  materiasList) {  
-
-		try {        
-			//ordeno por nroMaterias
-			Collections.sort(materiasList, new MateriasComparator( new MateriasncodMateriaComparator()));
-
-			DiccionarioMultipleTDA diccM = new DicMultipleL();
-			diccM.InicializarDiccionario();
-			int codMateria = 0;	
-			int cont = 0;	
-
-			System.out.println("2Materias comunes a todas las carreras indicadas, ordenadas por código de materia (no\r\n" + 
-					"incluir materias optativas)");
-			System.out.println("Clave(Cod Materia) Valor(Nro Carreras)");
-			for(int indice = 0;indice < materiasList.size() ;indice++)
-			{      
-				if (!materiasList.get(indice).materias.contains("Optativa")) {
-					if (codMateria !=  materiasList.get(indice).codMateria) {
-						codMateria = materiasList.get(indice).codMateria;	
-						cont = 1;
-						diccM.Agregar(codMateria, materiasList.get(indice).nroCarrera);
-					}else {
-						cont = cont +1;
-						diccM.Agregar(codMateria, materiasList.get(indice).nroCarrera);	
-						if (cont == 4) {
-							System.out.println(materiasList.get(indice).materias);
-							cont = 0;
-						}
-					}
-				}else {
-					cont = 0;
-				}
-
-			}
-			mostrar(diccM);
-		}
-		catch(Exception e){
-			e.printStackTrace();
-		}
-
-	}
-
-
-	public static void materiasComunesConDiccionario( ArrayList<Materias>  materiasList) {  
 
 		try {        
 			//ordeno por nroMaterias
