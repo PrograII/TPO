@@ -26,20 +26,20 @@ public class AppTPO {
 
 		DiccionarioMultipleTDA diccM = new DicMultipleL();
 		ArrayList<Materias> meteriaList = new ArrayList<Materias>();
-
 		diccM.InicializarDiccionario();		
 		meteriaList = leeyCargaDicMul(diccM);		
 		mostrar(diccM);		
-		/*Ordeno la lista por nroCarrera*/
-		//Collections.sort(meteriaList);	
+		
 		contidadPorCarrera(diccM);
 		porcentajeMateriasInfPorCarrera(diccM);
 		
 		porcentajeMateriasCienciasBPorCarrera(diccM);
 		porcentajeMateriasCienciasSPorCarrera(diccM);
 
-		contidadMateriasOptativas(meteriaList);		
-		materiasComunes(meteriaList);
+		DiccionarioSimpleTDA dicNomMaterias = new DicSimpleL(); 
+		
+		contidadMateriasOptativas(diccM);	
+		materiasComunes(diccM);
 		
 		compararCarreras(diccM);
 		materiasUnicaCarrera(diccM);
@@ -72,43 +72,7 @@ public class AppTPO {
 
 	}
 
-	public static class MateriasComparator implements Comparator<Materias> {
-
-		private List<Comparator<Materias>> listComparators;
-
-		@SafeVarargs
-		public MateriasComparator(Comparator<Materias>... comparators) {
-			this.listComparators = Arrays.asList(comparators);
-		}
-
-		@Override
-		public int compare(Materias emp1, Materias emp2) {
-			for (Comparator<Materias> comparator : listComparators) {
-				int result = comparator.compare(emp1, emp2);
-				if (result != 0) {
-					return result;
-				}
-			}
-			return 0;
-		}
-	}
-
-	public static class MateriasnroCarreraComparator implements Comparator<Materias> {		  
-
-		@Override
-		public int compare(Materias emp1, Materias emp2) {
-			return emp1.nroCarrera.compareTo(emp2.nroCarrera);
-		}
-	}
-
-	public static class MateriasncodMateriaComparator implements Comparator<Materias> {
-
-
-		@Override
-		public int compare(Materias emp1, Materias emp2) {
-			return emp1.codMateria.compareTo(emp2.codMateria);
-		}
-	}
+	
 
 	/**
 	@Tarea : 1. Cargar los datos de las carreras en un diccionario múltiple, donde la clave corresponde al
@@ -322,10 +286,12 @@ public class AppTPO {
 			    	}
 			    	keys.Sacar(aux);
 			    	System.out.println("La carrera numero " + carr + " tiene " + ((cont3 * 100) / cont4) + "% de materias de ciencias sociales");
-			    	carr += 1;    		    	
+			    	carr += 1;    
+			    	
+			    	
 			    }
 		    		    	
-		    
+			    System.out.println("---------------------------------------");
 		}
 		catch(Exception e){
 			e.printStackTrace();
@@ -343,43 +309,37 @@ public class AppTPO {
 	@Costo
 	 **/
 
-	public static void contidadMateriasOptativas( ArrayList<Materias>  materiasList	) {  
+	public static void contidadMateriasOptativas( DiccionarioMultipleTDA dic) {  
 
 		try {        
-
-			//ordeno por nroCarrera
-			Collections.sort(materiasList, new MateriasComparator( new MateriasnroCarreraComparator()));
-
+			System.out.println("2.e Cantidad de materias optativas de cada una de las carreras:");			
 			DiccionarioSimpleTDA diccS = new DicSimpleL();
-			diccS.InicializarDiccionario();
-			int nroCarrera = 0;	
-
-
-
-			System.out.println("2e Cantidad de materias optativas de cada una de las carreras:");
-			System.out.println("Clave(Nro Carrera) Valor(Cant Optativas)");
-			for(int indice = 0;indice < materiasList.size() ;indice++)
-			{      
-				if (nroCarrera !=  materiasList.get(indice).nroCarrera) {
-					nroCarrera = materiasList.get(indice).nroCarrera;
+			ConjuntoTDA codCarre = dic.Claves();
+			ConjuntoTDA codigoMat = new ConjuntoLD();
+			while (!codCarre.ConjuntoVacio()) {
+				int codCarreAux = codCarre.Elegir();
+				codigoMat = dic.Recuperar(codCarreAux);
+				int codigoMatAux = 0;
+				while (!codigoMat.ConjuntoVacio()) {
+					codigoMatAux = codigoMat.Elegir();
+					if (codigoMatAux<100 ) {
+						//diccS.Agregar(codCarreAux,codigoMatAux );		
+						System.out.println("La carrera: " + NombreCarrera(codCarreAux) + ", tiene " +codigoMatAux + " materias optativas.");
+						
+					}
+					codigoMat.Sacar(codigoMatAux);
 				}
 
-				if (materiasList.get(indice).materias.contains("Optativa") && nroCarrera ==materiasList.get(indice).nroCarrera){    				
-
-
-					String str = materiasList.get(indice).materias;    
-					str = str.replaceAll("[^-?0-9]+", " "); 
-					diccS.Agregar(materiasList.get(indice).nroCarrera, Integer.parseInt(Arrays.asList(str.trim().split(" ")).get(0)));
-					//System.out.println(materias.get(indice).carrera + ": "+ Arrays.asList(str.trim().split(" ")).get(0));
-
-				}else {
-					diccS.Agregar(materiasList.get(indice).nroCarrera, 0); 
-					//System.out.println(materias.get(indice).carrera + ": "+ 0);
+				codCarre.Sacar(codCarreAux);
+				if (codigoMatAux > 100) {
+					System.out.println("La carrera: " + NombreCarrera(codCarreAux) + ", tiene 0 materias optativas.");
+					
 				}
-
 			}
+			
 			//chequear resultados
-			mostrar(diccS);
+			//mostrar(diccS);
+			System.out.println("---------------------------------------");
 		}
 		catch(Exception e){
 			e.printStackTrace();
@@ -387,35 +347,43 @@ public class AppTPO {
 		// return var;
 	}
 
+
 	/**
 	@Tarea :   2f. Materias comunes a todas las carreras indicadas, ordenadas por código de materia (no
 				incluir materias optativas)
 	@Parámetros
 	@Devuelve
-	@Precondición
+	@Precondición 
 	@Postcondición
 	@Costo
 	 **/
-	public static void materiasComunes( ArrayList<Materias>  materiasList) {  
+	public static void materiasComunes( DiccionarioMultipleTDA dic) {  
 
 		try {        
-			//ordeno por nroMaterias
-			Collections.sort(materiasList, new MateriasComparator( new MateriasncodMateriaComparator()));
-
-			DiccionarioMultipleTDA diccM = new DicMultipleL();
-			diccM.InicializarDiccionario();
+			
 			DiccionarioMultipleTDA diccMFinal = new DicMultipleL();
 			diccMFinal.InicializarDiccionario()	;
 
-			System.out.println("2f Materias comunes a todas las carreras indicadas, ordenadas por código de materia (no\r\n" + 
+			System.out.println("2.f Materias comunes a todas las carreras indicadas, ordenadas por código de materia (no\r\n" + 
 					"incluir materias optativas)");
-			System.out.println("Clave(Cod Materia) Valor(Nro Carreras)");
-			for(int indice = 0;indice < materiasList.size() ;indice++)
-			{      
-				if (!materiasList.get(indice).materias.contains("Optativa")) {						
-						diccM.Agregar(materiasList.get(indice).codMateria, materiasList.get(indice).nroCarrera);
+			
+			
+			ConjuntoTDA codCarre = dic.Claves();
+			ConjuntoTDA codsMater = new ConjuntoLD();			
+			DiccionarioMultipleTDA diccM = new DicMultipleL();
+		
+			while(!codCarre.ConjuntoVacio()){
+				int codCarreAux = codCarre.Elegir();
+				codsMater = dic.Recuperar(codCarreAux);				
+				while (!codsMater.ConjuntoVacio()) {	
+					if (codsMater.Elegir() > 100) {
+					diccM.Agregar(codsMater.Elegir(), codCarreAux);
+					}
+					codsMater.Sacar(codsMater.Elegir());
 				}
-			}
+				codCarre.Sacar(codCarre.Elegir());
+				}
+			
 			
 			int clave;
 			int conta = 0;
@@ -423,8 +391,7 @@ public class AppTPO {
 			if(!claves.ConjuntoVacio()){
 				while(!claves.ConjuntoVacio()){
 					clave = claves.Elegir();
-					ConjuntoTDA valores=diccM.Recuperar(clave);	
-					ConjuntoTDA valoresAux=diccM.Recuperar(clave);	
+					ConjuntoTDA valores=diccM.Recuperar(clave);						
 					if (!valores.ConjuntoVacio()){
 						conta = 0;
 						while(!valores.ConjuntoVacio()){
@@ -433,26 +400,82 @@ public class AppTPO {
 							}
 					}
 					if (conta == 4 ) {
-						while(!valoresAux.ConjuntoVacio()){
-							diccMFinal.Agregar(clave, valoresAux.Elegir());
-							valoresAux.Sacar(valoresAux.Elegir());
-						}
+						System.out.println("La materia "+ NombreMater(clave) + "(Codigo: " + clave  +  "), es comun a todas las carreras.");
 					}					
 					claves.Sacar(clave);
 					
 				}
 
-			}		
-			
-			mostrar(diccMFinal);
-			
-			
-			
+			}	
+			System.out.println("---------------------------------------");
 		}
 		catch(Exception e){
 			e.printStackTrace();
 		}
 
+	}
+
+	
+	public static String NombreMater(int  codMater) {
+		File archivo = null;
+		FileReader fr = null;
+		BufferedReader br = null;
+		String nombre= "";
+		
+
+		try {
+			archivo = new File ("Materias.csv");
+			fr = new FileReader (archivo);
+			br = new BufferedReader(fr);
+			br.readLine();
+			String linea = br.readLine();
+			
+
+			while(linea != null) {
+				String[] lis = linea.split(";");				
+				
+				if (Integer.parseInt(lis[1]) == codMater){
+					nombre =  lis[4];
+				};
+				linea = br.readLine();
+			}
+
+		}
+		catch(Exception e){
+			e.printStackTrace();
+		}
+		return nombre;
+	}
+	
+	public static String NombreCarrera(int  codCarre) {
+		File archivo = null;
+		FileReader fr = null;
+		BufferedReader br = null;
+		String nombre= "";
+		
+
+		try {
+			archivo = new File ("Materias.csv");
+			fr = new FileReader (archivo);
+			br = new BufferedReader(fr);
+			br.readLine();
+			String linea = br.readLine();
+			
+
+			while(linea != null) {
+				String[] lis = linea.split(";");				
+				
+				if (Integer.parseInt(lis[0]) == codCarre){
+					nombre =  lis[3];
+				};
+				linea = br.readLine();
+			}
+
+		}
+		catch(Exception e){
+			e.printStackTrace();
+		}
+		return nombre;
 	}
 
 
