@@ -302,16 +302,16 @@ public class AppTPO {
 	
 	/**
 	@Tarea : 2e. Cantidad de materias optativas de cada una de las carreras			 
-	@Parámetros
-	@Devuelve
-	@Precondición
-	@Postcondición
-	@Costo
+	@Parámetros  DiccionarioMultipleTDA
+	@Devuelve Resultados en pantalla
+	@Precondición  Tener los valores en el diccionario multiple
+	@Postcondición -
+	@Costo: Cuadratico
 	 **/
 
 	public static void contidadMateriasOptativas( DiccionarioMultipleTDA dic) {  
 
-		try {        
+	    
 			System.out.println("2.e Cantidad de materias optativas de cada una de las carreras:");			
 			DiccionarioSimpleTDA diccS = new DicSimpleL();
 			ConjuntoTDA codCarre = dic.Claves();
@@ -322,10 +322,8 @@ public class AppTPO {
 				int codigoMatAux = 0;
 				while (!codigoMat.ConjuntoVacio()) {
 					codigoMatAux = codigoMat.Elegir();
-					if (codigoMatAux<100 ) {
-						//diccS.Agregar(codCarreAux,codigoMatAux );		
-						System.out.println("La carrera: " + NombreCarrera(codCarreAux) + ", tiene " +codigoMatAux + " materias optativas.");
-						
+					if (codigoMatAux<100 ) { //solo las optativas
+						System.out.println("La carrera: " + NombreCarrera(codCarreAux) + ", tiene " +codigoMatAux + " materias optativas.");						
 					}
 					codigoMat.Sacar(codigoMatAux);
 				}
@@ -340,26 +338,22 @@ public class AppTPO {
 			//chequear resultados
 			//mostrar(diccS);
 			System.out.println("---------------------------------------");
-		}
-		catch(Exception e){
-			e.printStackTrace();
-		}
-		// return var;
+		
+		
 	}
 
 
 	/**
 	@Tarea :   2f. Materias comunes a todas las carreras indicadas, ordenadas por código de materia (no
 				incluir materias optativas)
-	@Parámetros
-	@Devuelve
-	@Precondición 
+	@Parámetros  DiccionarioMultipleTDA
+	@Devuelve Resultados en pantalla
+	@Precondición Tener los valores en el diccionario multiple  
 	@Postcondición
-	@Costo
+	@Costo Cuadratico
 	 **/
-	public static void materiasComunes( DiccionarioMultipleTDA dic) {  
-
-		try {        
+	public static void materiasComunes( DiccionarioMultipleTDA dic) {
+	     
 			
 			DiccionarioMultipleTDA diccMFinal = new DicMultipleL();
 			diccMFinal.InicializarDiccionario()	;
@@ -368,18 +362,21 @@ public class AppTPO {
 					"incluir materias optativas)");
 			
 			
-			ConjuntoTDA codCarre = dic.Claves();
-			ConjuntoTDA codsMater = new ConjuntoLD();			
+			ConjuntoTDA codCarre = dic.Claves();			 			
+			ConjuntoTDA codsMater ;
 			DiccionarioMultipleTDA diccM = new DicMultipleL();
-		
+			diccM.InicializarDiccionario();
+			int varcodsMater =0;
+			
 			while(!codCarre.ConjuntoVacio()){
 				int codCarreAux = codCarre.Elegir();
 				codsMater = dic.Recuperar(codCarreAux);				
-				while (!codsMater.ConjuntoVacio()) {	
-					if (codsMater.Elegir() > 100) {
-					diccM.Agregar(codsMater.Elegir(), codCarreAux);
+				while (!codsMater.ConjuntoVacio()) {
+					varcodsMater = codsMater.Elegir(); 
+					if (varcodsMater > 100) { //para no incluir las optativas
+					diccM.Agregar(varcodsMater, codCarreAux);
 					}
-					codsMater.Sacar(codsMater.Elegir());
+					codsMater.Sacar(varcodsMater);
 				}
 				codCarre.Sacar(codCarre.Elegir());
 				}
@@ -388,18 +385,19 @@ public class AppTPO {
 			int clave;
 			int conta = 0;
 			ConjuntoTDA claves = diccM.Claves();
+			ConjuntoTDA valores;
 			if(!claves.ConjuntoVacio()){
 				while(!claves.ConjuntoVacio()){
 					clave = claves.Elegir();
-					ConjuntoTDA valores=diccM.Recuperar(clave);						
+					valores = diccM.Recuperar(clave);
 					if (!valores.ConjuntoVacio()){
 						conta = 0;
 						while(!valores.ConjuntoVacio()){
-							conta = conta +1;							
-							valores.Sacar(valores.Elegir());
+							conta = conta +1;					
+							valores.Sacar(valores.Elegir());							
 							}
 					}
-					if (conta == 4 ) {
+					if (conta == 4 ) { //si estan en todas las carreras
 						System.out.println("La materia "+ NombreMater(clave) + "(Codigo: " + clave  +  "), es comun a todas las carreras.");
 					}					
 					claves.Sacar(clave);
@@ -407,76 +405,11 @@ public class AppTPO {
 				}
 
 			}	
-			System.out.println("---------------------------------------");
-		}
-		catch(Exception e){
-			e.printStackTrace();
-		}
+			System.out.println("---------------------------------------");		
 
 	}
 
 	
-	public static String NombreMater(int  codMater) {
-		File archivo = null;
-		FileReader fr = null;
-		BufferedReader br = null;
-		String nombre= "";
-		
-
-		try {
-			archivo = new File ("Materias.csv");
-			fr = new FileReader (archivo);
-			br = new BufferedReader(fr);
-			br.readLine();
-			String linea = br.readLine();
-			
-
-			while(linea != null) {
-				String[] lis = linea.split(";");				
-				
-				if (Integer.parseInt(lis[1]) == codMater){
-					nombre =  lis[4];
-				};
-				linea = br.readLine();
-			}
-
-		}
-		catch(Exception e){
-			e.printStackTrace();
-		}
-		return nombre;
-	}
-	
-	public static String NombreCarrera(int  codCarre) {
-		File archivo = null;
-		FileReader fr = null;
-		BufferedReader br = null;
-		String nombre= "";
-		
-
-		try {
-			archivo = new File ("Materias.csv");
-			fr = new FileReader (archivo);
-			br = new BufferedReader(fr);
-			br.readLine();
-			String linea = br.readLine();
-			
-
-			while(linea != null) {
-				String[] lis = linea.split(";");				
-				
-				if (Integer.parseInt(lis[0]) == codCarre){
-					nombre =  lis[3];
-				};
-				linea = br.readLine();
-			}
-
-		}
-		catch(Exception e){
-			e.printStackTrace();
-		}
-		return nombre;
-	}
 
 
 	/**
@@ -820,6 +753,70 @@ public class AppTPO {
 			o.Sacar(o.Elegir());
 
 		}
+	}
+	
+	
+
+	public static String NombreMater(int  codMater) {
+		File archivo = null;
+		FileReader fr = null;
+		BufferedReader br = null;
+		String nombre= "";
+		
+
+		try {
+			archivo = new File ("Materias.csv");
+			fr = new FileReader (archivo);
+			br = new BufferedReader(fr);
+			br.readLine();
+			String linea = br.readLine();
+			
+
+			while(linea != null) {
+				String[] lis = linea.split(";");				
+				
+				if (Integer.parseInt(lis[1]) == codMater){
+					nombre =  lis[4];
+				};
+				linea = br.readLine();
+			}
+
+		}
+		catch(Exception e){
+			e.printStackTrace();
+		}
+		return nombre;
+	}
+	
+	public static String NombreCarrera(int  codCarre) {
+		File archivo = null;
+		FileReader fr = null;
+		BufferedReader br = null;
+		String nombre= "";
+		
+
+		try {
+			archivo = new File ("Materias.csv");
+			fr = new FileReader (archivo);
+			br = new BufferedReader(fr);
+			br.readLine();
+			String linea = br.readLine();
+			
+
+			while(linea != null) {
+				String[] lis = linea.split(";");				
+				
+				if (Integer.parseInt(lis[0]) == codCarre){
+					nombre =  lis[3];
+				};
+				linea = br.readLine();
+			}
+
+		}
+		catch(Exception e){
+			e.printStackTrace();
+		}
+		return nombre;
 	}
 
 }
