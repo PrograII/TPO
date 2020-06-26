@@ -8,6 +8,7 @@ import java.util.Collections;
 import java.util.Comparator;
 import java.util.List;
 
+import MisMetodos.Metodos;
 import miApi.ConjuntoTDA;
 import misImplementaciones.ConjuntoLD;
 import miApi.DiccionarioMultipleTDA;
@@ -33,20 +34,20 @@ public class AppTPO {
 		contidadPorCarrera(diccM);
 		porcentajeMateriasInfPorCarrera(diccM);
 		
-		porcentajeMateriasCienciasBPorCarrera(diccM);
 		porcentajeMateriasCienciasSPorCarrera(diccM);
+		porcentajeMateriasCienciasBPorCarrera(diccM);
 
 		DiccionarioSimpleTDA dicNomMaterias = new DicSimpleL(); 
 		
 		contidadMateriasOptativas(diccM);	
 		materiasComunes(diccM);
 		
-		compararCarreras(diccM);
+		/*compararCarreras(diccM);
 		materiasUnicaCarrera(diccM);
 		
 		matrelacionadas20(diccM);
 		matnocomunes(diccM);
-		
+		*/
 
 	}
 
@@ -121,182 +122,116 @@ public class AppTPO {
 	
 	/**
 	@Tarea : 2a. Cantidad de materias de cada una de las carreras
-	@Parámetros
-	@Devuelve
-	@Precondición
-	@Postcondición
+	@Parámetros DiccionarioMultipleTDA
+	@Devuelve El numero de carrera junto a la cantidad de materias
+	@Precondición Diccionario Multiple inicializado y cargado
+	@Postcondición -
 	@Costo
 	 **/
 	public static void contidadPorCarrera( DiccionarioMultipleTDA var	) {  
-
-		try {        
-			
+			System.out.println("------------------------------------------------------------------------------------------------------------------");
 			System.out.println("2a. Cantidad de materias de cada una de las carreras");
 			ConjuntoTDA keys = var.Claves();
-		    
-		    int cant = 1;
-		    	
+			int aux = 0; 
+	    	int cont = 0;
+	    	int aux2=0;
+	    	ConjuntoTDA valores;
 		    while(!keys.ConjuntoVacio()) {
-		    	int aux = keys.Elegir();
-		    	int cont = 0;
-		    	ConjuntoTDA valores = var.Recuperar(aux);
+		    	aux = keys.Elegir();
+		    	cont = 0;
+		    	valores = var.Recuperar(aux);
 		    	while(!valores.ConjuntoVacio()) {
-		    		int aux2 = valores.Elegir();
-		    		cont += 1;
+		    		aux2 = valores.Elegir();
+		    		
+		    		if(aux2 > 9) {
+		    			cont += 1;
+		    		}
+		    		
 		    		valores.Sacar(aux2);
 		    	}
 		    	keys.Sacar(aux);
-		    	System.out.println("La carrera numero " + cant + " tiene " + cont + " materias");
-		    	cant += 1;
+		    	System.out.println("La carrera numero " + aux + " tiene " + cont + " materias");
 		    } 
-		}
-		catch(Exception e){
-			e.printStackTrace();
-		}
-		// return var;
+		    
+		    System.out.println("------------------------------------------------------------------------------------------------------------------");
 	}
 
 	
 	/**
 	@Tarea : 2.b Porcentaje de materias de informática en cada una de las carreras (materias que
 				comienzan con código 34xxx)
-	@Parámetros
-	@Devuelve
-	@Precondición
-	@Postcondición
+	@Parámetros DiccionarioMultipleTDA
+	@Devuelve Codigo de cada carrera junto al porcentaje de materias de informatica
+	@Precondición Diccionario Multiple inicializado y cargado
+	@Postcondición -
 	@Costo
 	 **/
-	public static void porcentajeMateriasInfPorCarrera( DiccionarioMultipleTDA var	) {  
-
-		try {        
-			
+	public static void porcentajeMateriasInfPorCarrera( DiccionarioMultipleTDA var) {  
+		
 			System.out.println("2.b Porcentaje de materias de informática en cada una de las carreras (materias que\r\n" + 
 					"comienzan con código 34xxx)");
 			ConjuntoTDA keys = var.Claves();
-		    int car = 1;
-		    
+		    Metodos m = new Metodos();
+		    int aux=0;
 		    while(!keys.ConjuntoVacio()) {
-		    	int aux = keys.Elegir();
-		    	int cont1 = 0;
-		    	int cont2 = 0;
-		    	ConjuntoTDA materias = var.Recuperar(aux);
 		    	
-		    	while(!materias.ConjuntoVacio()) {
-		    		int comp = materias.Elegir();
-		    		
-		    		if (Integer.toString(comp).startsWith("34")) {
-		    			cont1 += 1;
-		    		}
-		    		
-		    		cont2 += 1;
-		    		materias.Sacar(comp);
-		    	}
-		    	
+		    	aux = keys.Elegir();
+		    	System.out.println("La carrera numero " + aux + " tiene " + m.porcentajeMaterias(var,"34",aux) + "% de materias de informatica");
 		    	keys.Sacar(aux);
-		    	System.out.println("La carrera numero " + car + " tiene " + (cont1 * 100) / cont2 + "% de materias de informatica");
-		    	car += 1;
 		    		    	
 		    }
-		}
-		catch(Exception e){
-			e.printStackTrace();
-		}
-		// return var;
+		    System.out.println("------------------------------------------------------------------------------------------------------------------");
+
 	}
 
 	
 	/**
 	@Tarea : 2.c Porcentaje de materias de ciencias básicas en cada una de las carreras (materias que
 				comienzan con código 31xxx)
-	@Parámetros
-	@Devuelve
-	@Precondición
-	@Postcondición
+	@Parámetros DiccionarioMultipleTDA
+	@Devuelve Codigo de cada carrera junto al porcentaje de materias de ciencias basicas
+	@Precondición Diccionario Multiple inicializado y cargado
+	@Postcondición -
 	@Costo
 	 **/
-	public static void porcentajeMateriasCienciasBPorCarrera( DiccionarioMultipleTDA var	) {  
-
-		try {        
-			
+	public static void porcentajeMateriasCienciasSPorCarrera( DiccionarioMultipleTDA var	) {  
 			System.out.println("2.c Porcentaje de materias de ciencias básicas en cada una de las carreras (materias que\r\n" + 
 					"comienzan con código 31xxx)");
-			 ConjuntoTDA keys = var.Claves();
-			    keys = var.Claves();
-			    int carre = 1;
-			    
-			    while(!keys.ConjuntoVacio()) {
-			    	int aux = keys.Elegir();
-			    	int contd = 0;
-			    	int conte = 0;
-			    	ConjuntoTDA materias = var.Recuperar(aux);
-			    	while(!materias.ConjuntoVacio()) {
-			    		int comp = materias.Elegir();
-			    		if (Integer.toString(comp).startsWith("31")) {
-			    			contd += 1;
-			    		}
-			    		conte += 1;
-			    		materias.Sacar(comp);
-			    	}
-			    	keys.Sacar(aux);
-			    	System.out.println("La carrera numero " + carre + " tiene " + ((contd * 100) / conte) + "% de materias de ciencias básicas");
-			    	carre += 1;    		    	
-			    }
-			    System.out.println("---------------------------------------");
+			ConjuntoTDA keys = var.Claves();
+		    Metodos m = new Metodos();
+		    int aux=0;
+		    while(!keys.ConjuntoVacio()) {
+		    	
+		    	aux = keys.Elegir();
+		    	System.out.println("La carrera numero " + aux + " tiene " + m.porcentajeMaterias(var,"31",aux) + "% de materias de ciencias basicas");
+		    	keys.Sacar(aux);
 		    		    	
-		    
+		    }
+		    System.out.println("------------------------------------------------------------------------------------------------------------------");
 		}
-		catch(Exception e){
-			e.printStackTrace();
-		}
-		// return var;
-	}
 
 	
 	/**
 	@Tarea : 2.d Porcentaje de materias de ciencias sociales en cada una de las carreras (materias
 			comienzan con códigos 2xxxx y 33xxx)
-	@Parámetros
-	@Devuelve
-	@Precondición
-	@Postcondición
+	@Parámetros DiccionarioMultipleTDA
+	@Devuelve Codigo de cada carrera junto al porcentaje de materias de ciencias sociales
+	@Precondición Diccionario Multiple inicializado y cargado
+	@Postcondición -
 	@Costo
 	 **/
-	public static void porcentajeMateriasCienciasSPorCarrera( DiccionarioMultipleTDA var	) {  
-
-		try {        
-			
-			System.out.println("2.d Porcentaje de materias de ciencias sociales en cada una de las carreras (materias\r\n" + 
-					"comienzan con códigos 2xxxx y 33xxx)");
-			 ConjuntoTDA keys = var.Claves();
-			    keys = var.Claves();
-			    int carr = 1;
-			    
-			    while(!keys.ConjuntoVacio()) {
-			    	int aux = keys.Elegir();
-			    	int cont3 = 0;
-			    	int cont4 = 0;
-			    	ConjuntoTDA materias = var.Recuperar(aux);
-			    	while(!materias.ConjuntoVacio()) {
-			    		int comp = materias.Elegir();
-			    		if (Integer.toString(comp).startsWith("2") || Integer.toString(comp).startsWith("33")) {
-			    			cont3 += 1;
-			    		}
-			    		cont4 += 1;
-			    		materias.Sacar(comp);
-			    	}
-			    	keys.Sacar(aux);
-			    	System.out.println("La carrera numero " + carr + " tiene " + ((cont3 * 100) / cont4) + "% de materias de ciencias sociales");
-			    	carr += 1;    
-			    	
-			    	
-			    }
+	public static void porcentajeMateriasCienciasBPorCarrera( DiccionarioMultipleTDA var	) { 
+		System.out.println("2.d Porcentaje de materias de ciencias sociales en cada una de las carreras (materias\r\n" + "comienzan con códigos 2xxxx y 33xxx)");
+		ConjuntoTDA keys = var.Claves();
+		int aux=0;
+		while(!keys.ConjuntoVacio()) {
+			aux = keys.Elegir();
+			Metodos m = new Metodos();
+			System.out.println("La carrera numero " + aux + " tiene " + (m.porcentajeMaterias(var,"2",aux) + m.porcentajeMaterias(var,"33",aux)) + "% de materias de ciencias sociales");
+			keys.Sacar(aux);
 		    		    	
-			    System.out.println("---------------------------------------");
 		}
-		catch(Exception e){
-			e.printStackTrace();
-		}
-		// return var;
+	    System.out.println("------------------------------------------------------------------------------------------------------------------");
 	}
 
 	
@@ -337,7 +272,7 @@ public class AppTPO {
 			
 			//chequear resultados
 			//mostrar(diccS);
-			System.out.println("---------------------------------------");
+			 System.out.println("------------------------------------------------------------------------------------------------------------------");
 		
 		
 	}
@@ -405,12 +340,11 @@ public class AppTPO {
 				}
 
 			}	
-			System.out.println("---------------------------------------");		
+			 System.out.println("------------------------------------------------------------------------------------------------------------------");	
 
 	}
 
 	
-
 
 	/**
 	@Tarea :   2G. Carrera que comparte mas del 80% de las materias de otra carrera
@@ -420,6 +354,7 @@ public class AppTPO {
 	@Postcondición
 	@Costo
 	 **/
+	/*
 	public static void compararCarreras(DiccionarioMultipleTDA dic) {
 		
 		System.out.println("2.g Carrera/s que incluyan más del 80% de las materias de otra carrera, indicando las\r\n" + 
@@ -489,6 +424,7 @@ public class AppTPO {
 		}
 		return cumpleCondicion;
 	}
+	*/
 	/**
 	@Tarea :   2h. Materias que no comparten ninguna carrera
 	@Parámetros
@@ -497,6 +433,7 @@ public class AppTPO {
 	@Postcondición
 	@Costo
 	 **/
+	/*
 	public static void materiasUnicaCarrera(DiccionarioMultipleTDA dic) {
 		
 		System.out.println("2h. Materias que no comparten ninguna carrera");
@@ -523,7 +460,7 @@ public class AppTPO {
 		}
 	}
 	
-
+*/
 	/**
 	@Tarea: 2i. Carrera/s que sólo tengan el 20% de las materias de otra carrera, indicando las
 			carreras relacionadas
@@ -533,6 +470,7 @@ public class AppTPO {
 	@Postcondición
 	@Costo
 	 **/
+	/*
 	public static void matrelacionadas20(DiccionarioMultipleTDA var){
 		int matcoinc = 0;
 		int mattotal = 0;
@@ -585,7 +523,7 @@ public class AppTPO {
 		}
 		return contador;
 	}
-	
+	*/
 	/**
 	@Tarea 2 j
 	@Parámetros
@@ -594,6 +532,7 @@ public class AppTPO {
 	@Postcondición
 	@Costo
 	 **/
+	/*
 	public static void matnocomunes(DiccionarioMultipleTDA var) {
 		ConjuntoTDA carreras1 = var.Claves();
 		ConjuntoTDA carreras2 = var.Claves();
@@ -688,14 +627,13 @@ public class AppTPO {
 
 	}
 
-	
+	*/
 	/*
 	 * 
 	 * 
 	 * Utils
 	 * 
 	 * */
-
 
 
 	public static void mostrar (DiccionarioSimpleTDA d){
