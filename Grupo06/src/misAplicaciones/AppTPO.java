@@ -42,12 +42,11 @@ public class AppTPO {
 		contidadMateriasOptativas(diccM);	
 		materiasComunes(diccM);
 		
-		/*compararCarreras(diccM);
+		compararCarreras(diccM);
 		materiasUnicaCarrera(diccM);
 		
 		matrelacionadas20(diccM);
 		matnocomunes(diccM);
-		*/
 
 	}
 
@@ -121,12 +120,12 @@ public class AppTPO {
 
 	
 	/**
-	@Tarea : 2a. Cantidad de materias de cada una de las carreras
+	@Tarea : 2A. Cantidad de materias de cada una de las carreras
 	@Parámetros DiccionarioMultipleTDA
 	@Devuelve El numero de carrera junto a la cantidad de materias
 	@Precondición Diccionario Multiple inicializado y cargado
 	@Postcondición -
-	@Costo
+	@Costo Cuadratico(debido a que hay un ciclo while dentro de otro ciclo while)
 	 **/
 	public static void contidadPorCarrera( DiccionarioMultipleTDA var	) {  
 			System.out.println("------------------------------------------------------------------------------------------------------------------");
@@ -158,13 +157,13 @@ public class AppTPO {
 
 	
 	/**
-	@Tarea : 2.b Porcentaje de materias de informática en cada una de las carreras (materias que
+	@Tarea : 2B. Porcentaje de materias de informática en cada una de las carreras (materias que
 				comienzan con código 34xxx)
 	@Parámetros DiccionarioMultipleTDA
 	@Devuelve Codigo de cada carrera junto al porcentaje de materias de informatica
 	@Precondición Diccionario Multiple inicializado y cargado
 	@Postcondición -
-	@Costo
+	@Costo Cuadratico(porque hay un while en la funcion porcentajeMateriasInfPorCarrera y en el metodo porcentajeMaterias)
 	 **/
 	public static void porcentajeMateriasInfPorCarrera( DiccionarioMultipleTDA var) {  
 		
@@ -176,7 +175,8 @@ public class AppTPO {
 		    while(!keys.ConjuntoVacio()) {
 		    	
 		    	aux = keys.Elegir();
-		    	System.out.println("La carrera numero " + aux + " tiene " + m.porcentajeMaterias(var,"34",aux) + "% de materias de informatica");
+		    	System.out.println("La carrera numero " + aux + " tiene " + m.porcentajeMaterias(var,"34",aux) + "% de materias de informatica");//Se llama al metodo porcentajeMaterias el cual devuelve 
+		    	//el porcentaje de materias que empiezan con el numero "34"
 		    	keys.Sacar(aux);
 		    		    	
 		    }
@@ -186,13 +186,13 @@ public class AppTPO {
 
 	
 	/**
-	@Tarea : 2.c Porcentaje de materias de ciencias básicas en cada una de las carreras (materias que
+	@Tarea : 2C. Porcentaje de materias de ciencias básicas en cada una de las carreras (materias que
 				comienzan con código 31xxx)
 	@Parámetros DiccionarioMultipleTDA
 	@Devuelve Codigo de cada carrera junto al porcentaje de materias de ciencias basicas
 	@Precondición Diccionario Multiple inicializado y cargado
 	@Postcondición -
-	@Costo
+	@Costo Cuadratico(porque hay un while en la funcion porcentajeMateriasInfPorCarrera y en el metodo porcentajeMaterias)
 	 **/
 	public static void porcentajeMateriasCienciasSPorCarrera( DiccionarioMultipleTDA var	) {  
 			System.out.println("2.c Porcentaje de materias de ciencias básicas en cada una de las carreras (materias que\r\n" + 
@@ -203,7 +203,8 @@ public class AppTPO {
 		    while(!keys.ConjuntoVacio()) {
 		    	
 		    	aux = keys.Elegir();
-		    	System.out.println("La carrera numero " + aux + " tiene " + m.porcentajeMaterias(var,"31",aux) + "% de materias de ciencias basicas");
+		    	System.out.println("La carrera numero " + aux + " tiene " + m.porcentajeMaterias(var,"31",aux) + "% de materias de ciencias basicas");//Se llama al metodo porcentajeMaterias 
+		    	//el cual devuelve el porcentaje de materias que empiezan con el numero "31"
 		    	keys.Sacar(aux);
 		    		    	
 		    }
@@ -212,13 +213,13 @@ public class AppTPO {
 
 	
 	/**
-	@Tarea : 2.d Porcentaje de materias de ciencias sociales en cada una de las carreras (materias
+	@Tarea : 2D. Porcentaje de materias de ciencias sociales en cada una de las carreras (materias
 			comienzan con códigos 2xxxx y 33xxx)
 	@Parámetros DiccionarioMultipleTDA
 	@Devuelve Codigo de cada carrera junto al porcentaje de materias de ciencias sociales
 	@Precondición Diccionario Multiple inicializado y cargado
 	@Postcondición -
-	@Costo
+	@Costo Cuadratico(porque hay un while en la funcion porcentajeMateriasInfPorCarrera y en el metodo porcentajeMaterias)
 	 **/
 	public static void porcentajeMateriasCienciasBPorCarrera( DiccionarioMultipleTDA var	) { 
 		System.out.println("2.d Porcentaje de materias de ciencias sociales en cada una de las carreras (materias\r\n" + "comienzan con códigos 2xxxx y 33xxx)");
@@ -227,7 +228,8 @@ public class AppTPO {
 		while(!keys.ConjuntoVacio()) {
 			aux = keys.Elegir();
 			Metodos m = new Metodos();
-			System.out.println("La carrera numero " + aux + " tiene " + (m.porcentajeMaterias(var,"2",aux) + m.porcentajeMaterias(var,"33",aux)) + "% de materias de ciencias sociales");
+			System.out.println("La carrera numero " + aux + " tiene " + (m.porcentajeMaterias(var,"2",aux) + m.porcentajeMaterias(var,"33",aux)) + "% de materias de ciencias sociales");//Se llama al metodo porcentajeMaterias el cual devuelve 
+			//el porcentaje de materias que empiezan con el numero "33" o el numero "2"
 			keys.Sacar(aux);
 		    		    	
 		}
@@ -236,12 +238,12 @@ public class AppTPO {
 
 	
 	/**
-	@Tarea : 2e. Cantidad de materias optativas de cada una de las carreras			 
+	@Tarea : 2E. Cantidad de materias optativas de cada una de las carreras			 
 	@Parámetros  DiccionarioMultipleTDA
 	@Devuelve Resultados en pantalla
 	@Precondición  Tener los valores en el diccionario multiple
 	@Postcondición -
-	@Costo: Cuadratico
+	@Costo: Cuadratico(porque hay un ciclo while dentro de otro ciclo while)
 	 **/
 
 	public static void contidadMateriasOptativas( DiccionarioMultipleTDA dic) {  
@@ -279,13 +281,12 @@ public class AppTPO {
 
 
 	/**
-	@Tarea :   2f. Materias comunes a todas las carreras indicadas, ordenadas por código de materia (no
-				incluir materias optativas)
+	@Tarea : 2F. Materias comunes a todas las carreras indicadas, ordenadas por código de materia (no incluir materias optativas)
 	@Parámetros  DiccionarioMultipleTDA
 	@Devuelve Resultados en pantalla
 	@Precondición Tener los valores en el diccionario multiple  
-	@Postcondición
-	@Costo Cuadratico
+	@Postcondición -
+	@Costo Cuadratico(porque hay un ciclo while dentro de otro ciclo while)
 	 **/
 	public static void materiasComunes( DiccionarioMultipleTDA dic) {
 	     
@@ -347,14 +348,13 @@ public class AppTPO {
 	
 
 	/**
-	@Tarea :   2G. Carrera que comparte mas del 80% de las materias de otra carrera
-	@Parámetros
-	@Devuelve
-	@Precondición
-	@Postcondición
-	@Costo
+	@Tarea : 2G. Carrera que comparte mas del 80% de las materias de otra carrera
+	@Parámetros DiccionarioMultipleTDA
+	@Devuelve La carrera que comparte mas del 80% de materias de otra carrera
+	@Precondición Diccionario multiple cargado e inicializado
+	@Postcondición -
+	@Costo Lineal (debido a que en los metodos utilizados hay un solo while)
 	 **/
-	/*
 	public static void compararCarreras(DiccionarioMultipleTDA dic) {
 		
 		System.out.println("2.g Carrera/s que incluyan más del 80% de las materias de otra carrera, indicando las\r\n" + 
@@ -377,6 +377,7 @@ public class AppTPO {
 				}
 			}
 		}
+		System.out.println("------------------------------------------------------------------------------------------------------------------");
 	}
 	
 	public static int contadorConjunto(ConjuntoTDA a) {
@@ -418,59 +419,58 @@ public class AppTPO {
 			a.Sacar(a.Elegir());
 		}
 		int porcentaje = (c*100)/cantMaterias;
-		System.out.println(porcentaje);
 		if(porcentaje>80) {
 			cumpleCondicion = true;
 		}
 		return cumpleCondicion;
 	}
-	*/
 	/**
-	@Tarea :   2h. Materias que no comparten ninguna carrera
-	@Parámetros
-	@Devuelve
-	@Precondición
-	@Postcondición
-	@Costo
+	@Tarea :   2H. Materias que no comparten ninguna carrera
+	@Parámetros DiccionarioMultipleTDA
+	@Devuelve Materias que no se comparten con ninguna otra carrera
+	@Precondición El diccionario multiple debe estar inicializado y cargado
+	@Postcondición-
+	@Costo Cubico(debido a que hay dos ciclos while dentro de un ciclo while)
 	 **/
-	/*
 	public static void materiasUnicaCarrera(DiccionarioMultipleTDA dic) {
-		
-		System.out.println("2h. Materias que no comparten ninguna carrera");
-		int cantCarreras = contadorConjunto(dic.Claves());
-		int[] codCarreras = new int[cantCarreras];
-		boolean pertenece;
-		codCarreras = carrerasAVector(dic.Claves());
-		int cantMaterias;
-		for(int i=0; i<cantCarreras; i++) {
-			cantMaterias = contadorConjunto(dic.Recuperar(codCarreras[i]));
-			int[] materias = new int[cantMaterias];
-			materias = carrerasAVector(dic.Recuperar(codCarreras[i]));
-			for (int j=0; j<cantMaterias; j++) {
-				pertenece = false;
-				for(int x=0; x<cantCarreras; x++) {
-					if (x!=i && pertenece==false) {
-						pertenece = dic.Recuperar(codCarreras[x]).Pertenece(materias[j]);
-					}
-				}
-				if(!pertenece) {
-					System.out.println("La materia " + materias[j] + " pertenece unicamente a la carrera "  + codCarreras[i]);
-				}
-			}
-		}
-	}
-	
-*/
+		System.out.println("2.h Materias de cada carrera que no comparten con ninguna otra carrera, ordenadas por código de materia, indicando la carrera a la que pertenecen.");
+        boolean pertenece;
+        ConjuntoTDA materias = new ConjuntoLD();
+        ConjuntoTDA carreras = new ConjuntoLD();
+        ConjuntoTDA carreras2 = new ConjuntoLD();
+        carreras.InicializarConjunto();
+        carreras = dic.Claves();
+        while(!carreras.ConjuntoVacio()) {//1
+            materias.InicializarConjunto();
+            materias = dic.Recuperar(carreras.Elegir());
+            while(!materias.ConjuntoVacio()) {//2
+                pertenece = false;
+                carreras2.InicializarConjunto();
+                carreras2 = dic.Claves();
+                while(!carreras2.ConjuntoVacio()) {//3
+                    if (carreras.Elegir()!=carreras2.Elegir() && pertenece==false) {
+                        pertenece = dic.Recuperar(carreras2.Elegir()).Pertenece(materias.Elegir());
+                    }
+                    carreras2.Sacar(carreras2.Elegir());
+                }
+                if(!pertenece) {
+                    System.out.println("La materia " + materias.Elegir() + " pertenece unicamente a la carrera "  + carreras.Elegir());
+                }
+                materias.Sacar(materias.Elegir());
+            }
+            carreras.Sacar(carreras.Elegir());
+        }
+        System.out.println("------------------------------------------------------------------------------------------------------------------");
+    }
 	/**
-	@Tarea: 2i. Carrera/s que sólo tengan el 20% de las materias de otra carrera, indicando las
+	@Tarea: 2I. Carrera/s que sólo tengan el 20% de las materias de otra carrera, indicando las
 			carreras relacionadas
-	@Parámetros
-	@Devuelve
-	@Precondición
-	@Postcondición
-	@Costo
+	@Parámetros DiccionarioMultipleTDA
+	@Devuelve Las carreras con el 20% de las materias de otra carrera
+	@Precondición El diccionario multiple debe estar inicializado y cargado
+	@Postcondición-
+	@Costo Cubico(debido a que hay dos ciclos while dentro de un ciclo while)
 	 **/
-	/*
 	public static void matrelacionadas20(DiccionarioMultipleTDA var){
 		int matcoinc = 0;
 		int mattotal = 0;
@@ -481,19 +481,22 @@ public class AppTPO {
 		clavesrep.InicializarConjunto();
 		ConjuntoTDA matrel = new ConjuntoLD();
 		matrel.InicializarConjunto();
+		ConjuntoTDA valores1;
+		ConjuntoTDA valores2; 
 		System.out.println("2-I Carrera/s que sólo tengan el 20% de las materias de otra carrera, indicando las carreras relacionadas.");
-		while(!claves1.ConjuntoVacio()) {
-			while(!claves2.ConjuntoVacio()){
-				ConjuntoTDA valores1 = var.Recuperar(claves1.Elegir());
-				ConjuntoTDA valores2 = var.Recuperar(claves2.Elegir());
+		while(!claves1.ConjuntoVacio()) {//1
+			while(!claves2.ConjuntoVacio()){//2
+				valores1 = var.Recuperar(claves1.Elegir());
+				valores2 = var.Recuperar(claves2.Elegir());
 					if (!clavesrep.Pertenece(claves1.Elegir()) && !clavesrep.Pertenece(claves2.Elegir()) && !valores1.ConjuntoVacio() && claves1.Elegir() != claves2.Elegir()) {
-							while(!valores2.ConjuntoVacio()) {
+							while(!valores2.ConjuntoVacio()) {//3
 								mattotal ++;
 								if (valores1.Pertenece(valores2.Elegir())) 
 									matcoinc ++;
 								valores2.Sacar(valores2.Elegir());
 							}
-							c = porcentaje(mattotal, matcoinc, claves1.Elegir(), claves2.Elegir(), c);
+							c = porcentaje(mattotal, matcoinc, c);
+							System.out.println("La Carrera con código " + claves1.Elegir() + " tiene en común con la carrera "+ claves2.Elegir() + " el " + c + "% de sus materias.");
 							mattotal = 0;
 							matcoinc = 0;
 							claves2.Sacar(claves2.Elegir());
@@ -510,44 +513,50 @@ public class AppTPO {
 		}
 		if (c == 0)
 			System.out.println(" No se encontraron carreras con el 20% de sus materias en común.");
+		 System.out.println("------------------------------------------------------------------------------------------------------------------");
 	}
 	
 	
 	
-	private static int porcentaje(int total, int tengo, int clave1, int clave2, int contador) {
+	private static int porcentaje(int total, int tengo, int contador) {
 		int a = 0;
 		a = tengo * 100 / total;
-		System.out.println("La Carrera con código " + clave1 + " tiene en común con la carrera "+ clave2 + " el " + a + "% de sus materias.");
 		if (a <= 20) {
 			contador ++;
 		}
-		return contador;
+		return a;
 	}
-	*/
+	
 	/**
-	@Tarea 2 j
-	@Parámetros
-	@Devuelve
-	@Precondición
-	@Postcondición
-	@Costo
+	@Tarea 2.J Para cada combinación de dos carreras, indicar materias no comunes
+	@Parámetros DiccionarioMultipleTDA
+	@Devuelve Las materias no comunes entre dos carreras
+	@Precondición El diccionario multiple debe estar inicializado y cargado
+	@Postcondición -
+	@Costo Cubico(debido a que hay un ciclo while de matnocomunes y del metodo check dentro de un ciclo while)
 	 **/
-	/*
 	public static void matnocomunes(DiccionarioMultipleTDA var) {
 		ConjuntoTDA carreras1 = var.Claves();
 		ConjuntoTDA carreras2 = var.Claves();
 		ConjuntoTDA repasadas = new ConjuntoLD();
 		System.out.println("2-J Para cada combinación de dos carreras, indicar materias no comunes. ");
+		ConjuntoTDA materias1;
+		//materias1.InicializarConjunto();
+		ConjuntoTDA materias2;
+		//materias2.InicializarConjunto();
+		ConjuntoTDA mnc;
+		//mnc.InicializarConjunto();
 		while (!carreras2.ConjuntoVacio()) {
 			while (!carreras1.ConjuntoVacio()) {
 				if (carreras1.Elegir() == carreras2.Elegir() || repasadas.Pertenece(carreras1.Elegir())) {
 					carreras1.Sacar(carreras1.Elegir());
 				}
 				else {
-					ConjuntoTDA materias1 = var.Recuperar(carreras1.Elegir());
-					ConjuntoTDA materias2 = var.Recuperar(carreras2.Elegir());
-					ConjuntoTDA mnc = check(materias1,materias2);
-					mostrarmaterias(carreras1, carreras2, mnc);
+					materias1 = var.Recuperar(carreras1.Elegir());
+					materias2 = var.Recuperar(carreras2.Elegir());
+					mnc = check(materias1,materias2);
+					System.out.println("Materias que la carrera " + carreras2.Elegir() + " y la " + carreras1.Elegir() + " no tienen en común:");
+					mostrarmaterias(mnc);
 					carreras1.Sacar(carreras1.Elegir());
 					
 				}
@@ -557,6 +566,7 @@ public class AppTPO {
 			carreras2.Sacar(carreras2.Elegir());
 			carreras1 = var.Claves();
 		}
+		 System.out.println("------------------------------------------------------------------------------------------------------------------");
 	}	
 	
 	public static ConjuntoTDA check(ConjuntoTDA a, ConjuntoTDA b) {
@@ -572,8 +582,7 @@ public class AppTPO {
 		return mnc;
 	}
 	
-	public static void mostrarmaterias(ConjuntoTDA car1, ConjuntoTDA car2, ConjuntoTDA mnc) {
-		System.out.println("Materias que la carrera " + car2.Elegir() + " y la " + car1.Elegir() + " no tienen en común:");
+	public static void mostrarmaterias(ConjuntoTDA mnc) {
 		while(!mnc.ConjuntoVacio()) {
 			System.out.println(mnc.Elegir());
 			mnc.Sacar(mnc.Elegir());
@@ -604,15 +613,16 @@ public class AppTPO {
 	}
 
 	public static void copiarConjunto(ConjuntoTDA c1,ConjuntoTDA c2){
-		ConjuntoLD aux = new ConjuntoLD();
-		aux.InicializarConjunto();
-		pasarConjunto(c1,aux);
-		while(!aux.ConjuntoVacio()){
-			c2.Agregar(aux.Elegir());
-			c1.Agregar(aux.Elegir());
-			aux.Sacar(aux.Elegir());
-		}
-	}
+        ConjuntoLD aux = new ConjuntoLD();
+        aux.InicializarConjunto();
+        pasarConjunto(c1,aux);
+        while(!aux.ConjuntoVacio()){
+            int var = aux.Elegir();
+            c2.Agregar(var);
+            c1.Agregar(var);
+            aux.Sacar(var);
+        }
+    }
 	
     public static void pasarConjunto(ConjuntoTDA origen, ConjuntoTDA destino){
 		
@@ -626,8 +636,6 @@ public class AppTPO {
 		}		
 
 	}
-
-	*/
 	/*
 	 * 
 	 * 
