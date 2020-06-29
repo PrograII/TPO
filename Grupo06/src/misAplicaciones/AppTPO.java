@@ -14,7 +14,7 @@ import misImplementaciones.ConjuntoLD;
 import miApi.DiccionarioMultipleTDA;
 import miApi.DiccionarioSimpleTDA;
 import misImplementaciones.DicMultipleL;
-import misImplementaciones.DicSimpleL;
+
 
 /**
 @autores: Fabre, Juan; Rozenblum, Lautaro;Sapoznik, Lucas; Di Paolo, Ivan; Gaston Gomez; 
@@ -36,8 +36,6 @@ public class AppTPO {
 		
 		porcentajeMateriasCienciasSPorCarrera(diccM);
 		porcentajeMateriasCienciasBPorCarrera(diccM);
-
-		DiccionarioSimpleTDA dicNomMaterias = new DicSimpleL(); 
 		
 		contidadMateriasOptativas(diccM);	
 		materiasComunes(diccM);
@@ -249,10 +247,10 @@ public class AppTPO {
 	public static void contidadMateriasOptativas( DiccionarioMultipleTDA dic) {  
 
 	    
-			System.out.println("2.e Cantidad de materias optativas de cada una de las carreras:");			
-			DiccionarioSimpleTDA diccS = new DicSimpleL();
+			System.out.println("2.e Cantidad de materias optativas de cada una de las carreras:");					
 			ConjuntoTDA codCarre = dic.Claves();
 			ConjuntoTDA codigoMat = new ConjuntoLD();
+			Metodos m = new Metodos();
 			while (!codCarre.ConjuntoVacio()) {
 				int codCarreAux = codCarre.Elegir();
 				codigoMat = dic.Recuperar(codCarreAux);
@@ -260,14 +258,14 @@ public class AppTPO {
 				while (!codigoMat.ConjuntoVacio()) {
 					codigoMatAux = codigoMat.Elegir();
 					if (codigoMatAux<100 ) { //solo las optativas
-						System.out.println("La carrera: " + NombreCarrera(codCarreAux) + ", tiene " +codigoMatAux + " materias optativas.");						
+						System.out.println("La carrera: " + m.NombreCarrera(codCarreAux) + ", tiene " +codigoMatAux + " materias optativas.");						
 					}
 					codigoMat.Sacar(codigoMatAux);
 				}
 
 				codCarre.Sacar(codCarreAux);
 				if (codigoMatAux > 100) {
-					System.out.println("La carrera: " + NombreCarrera(codCarreAux) + ", tiene 0 materias optativas.");
+					System.out.println("La carrera: " + m.NombreCarrera(codCarreAux) + ", tiene 0 materias optativas.");
 					
 				}
 			}
@@ -297,11 +295,11 @@ public class AppTPO {
 			System.out.println("2.f Materias comunes a todas las carreras indicadas, ordenadas por código de materia (no\r\n" + 
 					"incluir materias optativas)");
 			
-			
+			Metodos m = new Metodos();
 			ConjuntoTDA codCarre = dic.Claves();			 			
 			ConjuntoTDA codsMater ;
 			DiccionarioMultipleTDA diccM = new DicMultipleL();
-			diccM.InicializarDiccionario();
+			diccM.InicializarDiccionario();		
 			int varcodsMater =0;
 			
 			while(!codCarre.ConjuntoVacio()){
@@ -334,7 +332,7 @@ public class AppTPO {
 							}
 					}
 					if (conta == 4 ) { //si estan en todas las carreras
-						System.out.println("La materia "+ NombreMater(clave) + "(Codigo: " + clave  +  "), es comun a todas las carreras.");
+						System.out.println("La materia "+ m.NombreMater(clave) + "(Codigo: " + clave  +  "), es comun a todas las carreras.");
 					}					
 					claves.Sacar(clave);
 					
@@ -699,71 +697,7 @@ public class AppTPO {
 			o.Sacar(o.Elegir());
 
 		}
-	}
-	
-	
-
-	public static String NombreMater(int  codMater) {
-		File archivo = null;
-		FileReader fr = null;
-		BufferedReader br = null;
-		String nombre= "";
-		
-
-		try {
-			archivo = new File ("Materias.csv");
-			fr = new FileReader (archivo);
-			br = new BufferedReader(fr);
-			br.readLine();
-			String linea = br.readLine();
-			
-
-			while(linea != null) {
-				String[] lis = linea.split(";");				
-				
-				if (Integer.parseInt(lis[1]) == codMater){
-					nombre =  lis[4];
-				};
-				linea = br.readLine();
-			}
-
-		}
-		catch(Exception e){
-			e.printStackTrace();
-		}
-		return nombre;
-	}
-	
-	public static String NombreCarrera(int  codCarre) {
-		File archivo = null;
-		FileReader fr = null;
-		BufferedReader br = null;
-		String nombre= "";
-		
-
-		try {
-			archivo = new File ("Materias.csv");
-			fr = new FileReader (archivo);
-			br = new BufferedReader(fr);
-			br.readLine();
-			String linea = br.readLine();
-			
-
-			while(linea != null) {
-				String[] lis = linea.split(";");				
-				
-				if (Integer.parseInt(lis[0]) == codCarre){
-					nombre =  lis[3];
-				};
-				linea = br.readLine();
-			}
-
-		}
-		catch(Exception e){
-			e.printStackTrace();
-		}
-		return nombre;
-	}
+	}	
 
 }
 
