@@ -357,71 +357,28 @@ public class AppTPO {
 		
 		System.out.println("2.g Carrera/s que incluyan más del 80% de las materias de otra carrera, indicando las\r\n" + 
 				"carreras relacionadas.");
-		int c = contadorConjunto(dic.Claves());
+        Metodos m = new Metodos();
+		int c = m.contadorConjunto(dic.Claves());
 		int i, j;
 		boolean cumple;
-		int[] vectorCarreras = carrerasAVector(dic.Claves());
+		int[] vectorCarreras = m.carrerasAVector(dic.Claves());
 		for(i=0; i<c; i++) {
 			for(j=1; j<c; j++) {
 				if(j>i) {
-					cumple = cumplePorcentaje(dic.Recuperar(vectorCarreras[i]), dic.Recuperar(vectorCarreras[j]));
+					cumple = m.cumplePorcentaje(dic.Recuperar(vectorCarreras[i]), dic.Recuperar(vectorCarreras[j]));
 					if(cumple) {
-						System.out.println("La carrera " + vectorCarreras[i] + " comparte mas del 80% de las materias de la carrera " + vectorCarreras[j]);
+						System.out.println("La carrera " + m.NombreCarrera(vectorCarreras[i]) + " comparte mas del 80% de las materias de la carrera " + m.NombreCarrera(vectorCarreras[j]));
 					}
-					cumple = cumplePorcentaje(dic.Recuperar(vectorCarreras[j]), dic.Recuperar(vectorCarreras[i]));
+					cumple = m.cumplePorcentaje(dic.Recuperar(vectorCarreras[j]), dic.Recuperar(vectorCarreras[i]));
 					if(cumple) {
-						System.out.println("La carrera " + vectorCarreras[j] + " comparte mas del 80% de las materias de la carrera " + vectorCarreras[i]);
+						System.out.println("La carrera " + m.NombreCarrera(vectorCarreras[j]) + " comparte mas del 80% de las materias de la carrera " + m.NombreCarrera(vectorCarreras[i]));
 					}
 				}
 			}
 		}
 		System.out.println("------------------------------------------------------------------------------------------------------------------");
 	}
-	
-	public static int contadorConjunto(ConjuntoTDA a) {
-		ConjuntoTDA aux = new ConjuntoLD();
-		aux.InicializarConjunto();
-		int c = 0;
-		while(!a.ConjuntoVacio()) {
-			c++;
-			aux.Agregar(a.Elegir());
-			a.Sacar(a.Elegir());
-		}
-		PasarConjunto(aux, a);
-		return c;
-	}
-	public static int[] carrerasAVector(ConjuntoTDA a) {
-		ConjuntoTDA aux = new ConjuntoLD();
-		aux.InicializarConjunto();
-		int c = contadorConjunto(a);
-		int[] carreras = new int[c];
-		c-=1;
-		while((!a.ConjuntoVacio()) && c>=0) {
-			carreras[c]=a.Elegir();
-			aux.Agregar(a.Elegir());
-			a.Sacar(a.Elegir());
-			c--;
-		}
-		PasarConjunto(aux,a);
-		return carreras;
-		
-	}
-	public static boolean cumplePorcentaje(ConjuntoTDA a, ConjuntoTDA b) {
-		int c = 0;
-		int cantMaterias = contadorConjunto(b);
-		boolean cumpleCondicion = false;
-		while(!a.ConjuntoVacio()) {
-			if (b.Pertenece(a.Elegir())) {
-				c++;
-			}
-			a.Sacar(a.Elegir());
-		}
-		int porcentaje = (c*100)/cantMaterias;
-		if(porcentaje>80) {
-			cumpleCondicion = true;
-		}
-		return cumpleCondicion;
-	}
+
 	/**
 	@Tarea :   2H. Materias que no comparten ninguna carrera
 	@Parámetros DiccionarioMultipleTDA
@@ -432,7 +389,8 @@ public class AppTPO {
 	 **/
 	public static void materiasUnicaCarrera(DiccionarioMultipleTDA dic) {
 		System.out.println("2.h Materias de cada carrera que no comparten con ninguna otra carrera, ordenadas por código de materia, indicando la carrera a la que pertenecen.");
-        boolean pertenece;
+        Metodos m = new Metodos();
+		boolean pertenece;
         ConjuntoTDA materias = new ConjuntoLD();
         ConjuntoTDA carreras = new ConjuntoLD();
         ConjuntoTDA carreras2 = new ConjuntoLD();
@@ -452,7 +410,7 @@ public class AppTPO {
                     carreras2.Sacar(carreras2.Elegir());
                 }
                 if(!pertenece) {
-                    System.out.println("La materia " + materias.Elegir() + " pertenece unicamente a la carrera "  + carreras.Elegir());
+                    System.out.println("La materia " + m.NombreMater(materias.Elegir()) + " pertenece unicamente a la carrera "  + m.NombreCarrera(carreras.Elegir()));
                 }
                 materias.Sacar(materias.Elegir());
             }
@@ -678,6 +636,7 @@ public class AppTPO {
 
 	public static void mostrarConjunto(ConjuntoTDA c){
 		ConjuntoLD aux = new ConjuntoLD();
+		Metodos m = new Metodos();
 		aux.InicializarConjunto();
 		if (!c.ConjuntoVacio()){
 			while(!c.ConjuntoVacio()){
@@ -686,18 +645,9 @@ public class AppTPO {
 				aux.Agregar(c.Elegir());
 				c.Sacar(c.Elegir());
 			}
-			PasarConjunto(aux, c);
+			m.PasarConjunto(aux, c);
 		}else {
 			System.out.println("Pila Vacia");
-		}	}
-
-	public static void PasarConjunto(ConjuntoTDA o, ConjuntoTDA d){
-		while(!o.ConjuntoVacio()){
-			d.Agregar(o.Elegir());
-			o.Sacar(o.Elegir());
-
-		}
-	}	
-
+		}	}	
 }
 

@@ -92,7 +92,56 @@ public class Metodos {
 		return nombre;
 	}
 	
-	
+	public boolean cumplePorcentaje(ConjuntoTDA a, ConjuntoTDA b) {
+		int c = 0;
+		int cantMaterias = contadorConjunto(b);
+		boolean cumpleCondicion = false;
+		while(!a.ConjuntoVacio()) {
+			if (b.Pertenece(a.Elegir())) {
+				c++;
+			}
+			a.Sacar(a.Elegir());
+		}
+		int porcentaje = (c*100)/cantMaterias;
+		if(porcentaje>80) {
+			cumpleCondicion = true;
+		}
+		return cumpleCondicion;
+	}
+	public int[] carrerasAVector(ConjuntoTDA a) {
+		ConjuntoTDA aux = new ConjuntoLD();
+		aux.InicializarConjunto();
+		int c = contadorConjunto(a);
+		int[] carreras = new int[c];
+		c-=1;
+		while((!a.ConjuntoVacio()) && c>=0) {
+			carreras[c]=a.Elegir();
+			aux.Agregar(a.Elegir());
+			a.Sacar(a.Elegir());
+			c--;
+		}
+		PasarConjunto(aux,a);
+		return carreras;	
+	}
+	public int contadorConjunto(ConjuntoTDA a) {
+		ConjuntoTDA aux = new ConjuntoLD();
+		aux.InicializarConjunto();
+		int c = 0;
+		while(!a.ConjuntoVacio()) {
+			c++;
+			aux.Agregar(a.Elegir());
+			a.Sacar(a.Elegir());
+		}
+		PasarConjunto(aux, a);
+		return c;
+	}
+	public void PasarConjunto(ConjuntoTDA o, ConjuntoTDA d){
+		while(!o.ConjuntoVacio()){
+			d.Agregar(o.Elegir());
+			o.Sacar(o.Elegir());
+
+		}
+	}
 	/****Metodos TDA***/
 	
 	
