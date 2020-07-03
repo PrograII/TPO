@@ -137,7 +137,7 @@ public class AppTPO {
 		    	while(!valores.ConjuntoVacio()) {
 		    		aux2 = valores.Elegir();
 		    		
-		    		if(aux2 > 9) {
+		    		if(aux2 > 100) {
 		    			cont += 1;
 		    		}
 		    		
@@ -248,11 +248,12 @@ public class AppTPO {
 			Metodos m = new Metodos();
 			int e=0;
 			int h=0;
+			int codigoMatAux = 0;
 			while (!codCarre.ConjuntoVacio()) {
 				e=codCarre.Elegir();
 				int codCarreAux = e;
 				codigoMat = dic.Recuperar(codCarreAux); //con el codigo de carrera recupero los codigos de marerias
-				int codigoMatAux = 0;
+				codigoMatAux = 0;
 				while (!codigoMat.ConjuntoVacio()) {
 					h=codigoMat.Elegir();
 					codigoMatAux = h;
@@ -307,7 +308,7 @@ public class AppTPO {
 				while (!codsMater.ConjuntoVacio()) {
 					varcodsMater = codsMater.Elegir(); 
 					if (varcodsMater > 100) { //para no incluir las optativas
-					diccM.Agregar(varcodsMater, codCarreAux);
+					diccM.Agregar(varcodsMater, codCarreAux); // invierto el diccionario 
 					}
 					codsMater.Sacar(varcodsMater);
 				}
@@ -321,8 +322,8 @@ public class AppTPO {
 			ConjuntoTDA valores;
 			if(!claves.ConjuntoVacio()){
 				while(!claves.ConjuntoVacio()){
-					clave = claves.Elegir();
-					valores = diccM.Recuperar(clave);
+					clave = claves.Elegir(); //codigo de materia
+					valores = diccM.Recuperar(clave); //obtengo el codigo de carrera
 					if (!valores.ConjuntoVacio()){
 						conta = 0;
 						while(!valores.ConjuntoVacio()){
