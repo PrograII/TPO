@@ -35,6 +35,7 @@ public class DicMultipleL implements DiccionarioMultipleTDA{
 		if(nc==null){
 			nc=new NodoClave();
 			nc.clave=clave;
+			nc.valores = null;
 			nc.sigClave=origen;
 			origen=nc;
 		}

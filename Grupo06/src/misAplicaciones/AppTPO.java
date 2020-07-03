@@ -254,7 +254,7 @@ public class AppTPO {
 				int codCarreAux = e;
 				codigoMat = dic.Recuperar(codCarreAux); //con el codigo de carrera recupero los codigos de marerias
 				codigoMatAux = 0;
-				while (!codigoMat.ConjuntoVacio()) {
+				while (!codigoMat.ConjuntoVacio()) { //conjunto con los codigos de materias
 					h=codigoMat.Elegir();
 					codigoMatAux = h;
 					if (codigoMatAux<100 ) { //solo las optativas
@@ -287,11 +287,7 @@ public class AppTPO {
 	@Costo Cuadratico(porque hay un ciclo while dentro de otro ciclo while)
 	 **/
 	public static void materiasComunes( DiccionarioMultipleTDA dic) {
-	     
-			
-			/*DiccionarioMultipleTDA diccMFinal = new DicMultipleL();
-			diccMFinal.InicializarDiccionario()	;
-			*/
+
 			System.out.println("2f. Materias comunes a todas las carreras indicadas, ordenadas por código de materia (no\r\n" + 
 					"incluir materias optativas)");
 			
@@ -308,7 +304,7 @@ public class AppTPO {
 				while (!codsMater.ConjuntoVacio()) {
 					varcodsMater = codsMater.Elegir(); 
 					if (varcodsMater > 100) { //para no incluir las optativas
-					diccM.Agregar(varcodsMater, codCarreAux); // invierto el diccionario 
+					diccM.Agregar(varcodsMater, codCarreAux); // invierto el diccionario original Codigo Materia - Codigo Carrera
 					}
 					codsMater.Sacar(varcodsMater);
 				}
@@ -316,28 +312,24 @@ public class AppTPO {
 				}
 			
 			
-			int clave;
+			int claveCodMaterAux;
 			int conta = 0;
-			ConjuntoTDA claves = diccM.Claves();
-			ConjuntoTDA valores;
-			if(!claves.ConjuntoVacio()){
-				while(!claves.ConjuntoVacio()){
-					clave = claves.Elegir(); //codigo de materia
-					valores = diccM.Recuperar(clave); //obtengo el codigo de carrera
-					if (!valores.ConjuntoVacio()){
-						conta = 0;
-						while(!valores.ConjuntoVacio()){
-							conta = conta +1;					
-							valores.Sacar(valores.Elegir());							
-							}
-					}
-					if (conta == 4 ) { //si estan en todas las carreras
-						System.out.println("La materia "+ m.NombreMater(clave) + "(Codigo: " + clave  +  "), es comun a todas las carreras.");
-					}					
-					claves.Sacar(clave);
-					
+			ConjuntoTDA CodsMaterAux = diccM.Claves(); //Codigo Materia - Codigo Carrera
+			ConjuntoTDA valoresCodCarreAux;			
+			while(!CodsMaterAux.ConjuntoVacio()){
+				claveCodMaterAux = CodsMaterAux.Elegir(); //codigo de materia a evaluar
+				valoresCodCarreAux = diccM.Recuperar(claveCodMaterAux); //obtengo todas las carrera en cual esta la materia
+				if (!valoresCodCarreAux.ConjuntoVacio()){
+					conta = 0;
+					while(!valoresCodCarreAux.ConjuntoVacio()){ // recorro el conjunto de carrera 
+						conta = conta +1;		//cuanto en cuantas carrerar aparecio la materia		
+						valoresCodCarreAux.Sacar(valoresCodCarreAux.Elegir());							
+						}
 				}
-
+				if (conta == 4 ) { //si es 4 entonces esta en todas la carreras
+					System.out.println("La materia "+ m.NombreMater(claveCodMaterAux) + "(Codigo: " + claveCodMaterAux  +  "), es comun a todas las carreras.");
+				}					
+				CodsMaterAux.Sacar(claveCodMaterAux);
 			}	
 			 System.out.println("------------------------------------------------------------------------------------------------------------------");	
 
@@ -351,7 +343,7 @@ public class AppTPO {
 	@Devuelve La carrera que comparte mas del 80% de materias de otra carrera
 	@Precondición Diccionario multiple cargado e inicializado
 	@Postcondición -
-	@Costo Lineal (debido a que en los metodos utilizados hay un solo while)
+	@Costo Cuadraticao(porque hay un ciclo while dentro de otro ciclo while)
 	 **/
 	public static void compararCarreras(DiccionarioMultipleTDA dic) {
 
